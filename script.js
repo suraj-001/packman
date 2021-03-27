@@ -183,7 +183,7 @@ enemy2.speed = myNum(2) + 1;
 enemy2.dirx = 0;
 enemy2.diry = 0;
 if (powerdot.ghosteat) {
-enemy2.speed = enemy2.speed * -1;
+enemy2.speed = enemy2.speed * -(0.1);
 }
 if (enemy2.moving % 2) {
 if (player.x < enemy2.x) {
@@ -224,12 +224,37 @@ score++;
 } else {
 gscore++;
 }
+if(gscore<10 && score < 3 ){
 player.x = 10;
 player.y = 100;
 enemy.x = 300;
 enemy.y = 200;
 powerdot.pcountdown = 0;
 }
+else {if(score==3 && gscore < 10){
+    alert("you win");
+            document.location.reload();
+            clearInterval(interval);
+            player.x = 10;
+           player.y = 100;
+            enemy.x = 300;
+           enemy.y = 200;
+            powerdot.pcountdown = 0;
+            gscore=0;
+            score=0;
+}
+else if(gscore==10 && score<3){
+    alert("GAME OVER");
+            document.location.reload();
+            clearInterval(interval);
+            player.x = 10;
+            player.y = 100;
+            enemy.x = 300;
+             enemy.y = 200;
+            powerdot.pcountdown = 0;
+            gscore=0;
+            score=0; // Needed for Chrome to end game
+}}}
 if (player.x <= (enemy2.x + 26) && enemy2.x <= (player.x + 26) && player.y <= (enemy2.y + 26
 ) && enemy2.y <= (player.y + 32)) {
 console.log('ghost');
@@ -238,11 +263,37 @@ score++;
 } else {
 gscore++;
 }
+if(gscore<10 && score < 3 ){
 player.x = 10;
 player.y = 100;
 enemy2.x = 300;
 enemy2.y = 200;
 powerdot.pcountdown = 0;
+}
+else {if(score==3 && gscore < 10){
+    alert("you win");
+            document.location.reload();
+            clearInterval(interval);
+            player.x = 10;
+           player.y = 100;
+            enemy2.x = 300;
+           enemy2.y = 200;
+          powerdot.pcountdown = 0;
+            gscore=0;
+            score=0;
+}
+else if(gscore==10 && score<3){
+    alert("GAME OVER");
+            document.location.reload();
+            clearInterval(interval);
+            player.x = 10;
+            player.y = 100;
+            enemy2.x = 300;
+            enemy2.y = 200;
+            powerdot.pcountdown = 0;
+            gscore=0;
+            score=0; // Needed for Chrome to end game
+}}
 }
 //Collision detection powerup
 if (player.x <= powerdot.x && powerdot.x <= (player.x + 32) && player.y <= powerdot.y &&
@@ -301,3 +352,5 @@ context.drawImage(mainImage, enemy.ghostNum, enemy.flash, 32, 32, enemy.x, enemy
 context.drawImage(mainImage, player.pacmouth, player.pacdir, 32, 32, player.x, player.y, 32,
 32);
 }
+
+var interval = setInterval(draw, 0);
